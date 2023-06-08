@@ -1,5 +1,3 @@
-github.com/0xF7A4C6/clean-http v0.0.0-20230608033142-c8b1c392b464 h1:Zpz7yX1If7uHqls04iA4rmkg5aO7s1Z5pWVJ7kt3vu4=
-github.com/0xF7A4C6/clean-http v0.0.0-20230608033142-c8b1c392b464/go.mod h1:cgpQA440bxhahouiVEgWqpV3ZgdP1cTSOpfMRjvSd8I=
 github.com/0xF7A4C6/clean-http v0.0.0-20230608033955-282530ead08e h1:FI/Fg4P60crDEn0TYK3JXr5udPeoVWOxurCz5lRLniI=
 github.com/0xF7A4C6/clean-http v0.0.0-20230608033955-282530ead08e/go.mod h1:cgpQA440bxhahouiVEgWqpV3ZgdP1cTSOpfMRjvSd8I=
 github.com/0xF7A4C6/fingerprint-client v0.0.0-20230608004554-fecc9cc5246e h1:7n0y1fuXrDEZpvWSJKp6GTdWcMfpb5SZrm0PQc9UXuI=
@@ -15,6 +13,7 @@ github.com/bogdanfinn/utls v1.5.16/go.mod h1:mHeRCi69cUiEyVBkKONB1cAbLjRcZnlJbGz
 github.com/danwakefield/fnmatch v0.0.0-20160403171240-cbb64ac3d964 h1:y5HC9v93H5EPKqaS1UYVg1uYah5Xf51mBfIoWehClUQ=
 github.com/danwakefield/fnmatch v0.0.0-20160403171240-cbb64ac3d964/go.mod h1:Xd9hchkHSWYkEqJwUGisez3G1QY8Ryz0sdWrLPMGjLk=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
+github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-stack/stack v1.8.1 h1:ntEHSVwIt7PNXNpgPmVfMrNhLtgjlmnZha2kOpuRiDw=
 github.com/go-stack/stack v1.8.1/go.mod h1:dcoOX6HbPZSZptuspn9bctJ+N/CnF5gGygcUP3XYfe4=
@@ -22,11 +21,15 @@ github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/ad
 github.com/h2non/filetype v1.1.1/go.mod h1:319b3zT68BvV+WRj7cwy856M2ehB3HqNOt6sy1HndBY=
 github.com/klauspost/compress v1.15.12 h1:YClS/PImqYbn+UILDnqxQCZ3RehC9N318SU3kElDUEM=
 github.com/klauspost/compress v1.15.12/go.mod h1:QPwzmACJjUTFsnSHH934V6woptycfrDDJnH7hvFVbGM=
+github.com/pieroxy/lz-string-go v0.0.0-20150527125527-815b44bac831 h1:UxgbSr4Gv3rR1C8t9IlAqOzzpWr+6leGjgMBQGt5YJE=
+github.com/pieroxy/lz-string-go v0.0.0-20150527125527-815b44bac831/go.mod h1:GnqWWZ9wK94/SaSjO1YIpW29OJ9ogPsdAkCRJMrRSTQ=
 github.com/playwright-community/playwright-go v0.2000.1 h1:2JViSHpJQ/UL/PO1Gg6gXV5IcXAAsoBJ3KG9L3wKXto=
 github.com/playwright-community/playwright-go v0.2000.1/go.mod h1:1y9cM9b9dVHnuRWzED1KLM7FtbwTJC8ibDjI6MNqewU=
+github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
+github.com/stretchr/testify v1.8.0 h1:pSgiaMZlXftHpm5L7V1+rVB+AZJydKsMxsQBIJw4PKk=
 github.com/tam7t/hpkp v0.0.0-20160821193359-2b70b4024ed5 h1:YqAladjX7xpA6BM04leXMWAEjS0mTZ5kUU9KRBriQJc=
 github.com/tam7t/hpkp v0.0.0-20160821193359-2b70b4024ed5/go.mod h1:2JjD2zLQYH5HO74y5+aE3remJQvl6q4Sn6aWA2wD1Ng=
 golang.org/x/crypto v0.1.0 h1:MDRAIl0xIo9Io2xV565hzXHw3zVseKrJKodhohM5CjU=
@@ -41,3 +44,4 @@ gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8
 gopkg.in/square/go-jose.v2 v2.6.0 h1:NGk74WTnPKBNUhNzQX7PYcTLUjoq7mzKk2OKbvwk2iI=
 gopkg.in/square/go-jose.v2 v2.6.0/go.mod h1:M9dMgbHiYLoDGQrXy7OpJDJWiKiU//h+vD76mk0e1AI=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
+gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=

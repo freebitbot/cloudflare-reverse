@@ -1491,6 +1491,7 @@ var fp = {
     ]
 }
 
+// lz-string compression
 function cryptData(color, elem) {
     function f(item, i, d) {
         x = {}
@@ -1850,7 +1851,7 @@ function cryptData(color, elem) {
     return f(elem, 6, chartCAt)
 }
 
-
+console.log(JSON.stringify(fp))
 
 var p = cryptData("4O9h3MDECdzjKS15ayU6T7N2bWpFGoueIt0gvxZswYcXlnRLrViBJfm-kH8+$qQPA", JSON.stringify(fp));
 
