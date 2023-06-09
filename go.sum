@@ -1,5 +1,7 @@
 github.com/0xF7A4C6/clean-http v0.0.0-20230608033955-282530ead08e h1:FI/Fg4P60crDEn0TYK3JXr5udPeoVWOxurCz5lRLniI=
 github.com/0xF7A4C6/clean-http v0.0.0-20230608033955-282530ead08e/go.mod h1:cgpQA440bxhahouiVEgWqpV3ZgdP1cTSOpfMRjvSd8I=
+github.com/0xF7A4C6/clean-http v0.0.0-20230609193845-2b4ade58d25a h1:S3kqgPqpmnOFstz2Y6FNFQ27YvNcB9aW+xnRGL+Hp/g=
+github.com/0xF7A4C6/clean-http v0.0.0-20230609193845-2b4ade58d25a/go.mod h1:cgpQA440bxhahouiVEgWqpV3ZgdP1cTSOpfMRjvSd8I=
 github.com/0xF7A4C6/fingerprint-client v0.0.0-20230608004554-fecc9cc5246e h1:7n0y1fuXrDEZpvWSJKp6GTdWcMfpb5SZrm0PQc9UXuI=
 github.com/0xF7A4C6/fingerprint-client v0.0.0-20230608004554-fecc9cc5246e/go.mod h1:aDID4Bkp3nMIPr04TKGQ99QI9rnttAOBikkygVzOBOU=
 github.com/andybalholm/brotli v1.0.4 h1:V7DdXeJtZscaqfNuAdSRuRFzuiKlHSC/Zh3zl9qY3JY=

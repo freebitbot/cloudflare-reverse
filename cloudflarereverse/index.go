@@ -9,7 +9,6 @@ import (
 	http "github.com/bogdanfinn/fhttp"
 	"io/ioutil"
 	"math/rand"
-	"net/url"
 	"regexp"
 	"strings"
 	"time"
@@ -155,7 +154,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 		return "", fmt.Errorf("cant submit answer")
 	}
 
-	for _, c := range client.CookieJar.Cookies(&url.URL{Host: "discord.com"}) {
+	for _, c := range client.Cookies {
 		if c.Name == "__cf_bm" {
 			return c.Value, nil
 		}
