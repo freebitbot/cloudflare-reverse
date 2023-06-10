@@ -6,6 +6,8 @@ github.com/0xF7A4C6/clean-http v0.0.0-20230610030913-bf984ad5f636 h1:tQxrLFgJ35t
 github.com/0xF7A4C6/clean-http v0.0.0-20230610030913-bf984ad5f636/go.mod h1:cPGU8d5jp8i/5YE+w/q1TNB+hv6RvT+k+0Yc2b4lQrQ=
 github.com/0xF7A4C6/clean-http v0.0.0-20230610042633-1e8946cb6a60 h1:X+oQLc0N6+Tq1KKNx6KykyvRPzxLxikTnvQ5ezLw/XY=
 github.com/0xF7A4C6/clean-http v0.0.0-20230610042633-1e8946cb6a60/go.mod h1:cPGU8d5jp8i/5YE+w/q1TNB+hv6RvT+k+0Yc2b4lQrQ=
+github.com/0xF7A4C6/clean-http v0.0.0-20230610065349-7863ba038fc0 h1:JZYmv0Jmyz8tnkMPrU6Y2Nr2oMAK/DJe76hgK+IdSsA=
+github.com/0xF7A4C6/clean-http v0.0.0-20230610065349-7863ba038fc0/go.mod h1:cPGU8d5jp8i/5YE+w/q1TNB+hv6RvT+k+0Yc2b4lQrQ=
 github.com/0xF7A4C6/fingerprint-client v0.0.0-20230608004554-fecc9cc5246e h1:7n0y1fuXrDEZpvWSJKp6GTdWcMfpb5SZrm0PQc9UXuI=
 github.com/0xF7A4C6/fingerprint-client v0.0.0-20230608004554-fecc9cc5246e/go.mod h1:aDID4Bkp3nMIPr04TKGQ99QI9rnttAOBikkygVzOBOU=
 github.com/andybalholm/brotli v1.0.4 h1:V7DdXeJtZscaqfNuAdSRuRFzuiKlHSC/Zh3zl9qY3JY=

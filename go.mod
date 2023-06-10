@@ -3,7 +3,7 @@ module github.com/0xF7A4C6/cloudflare-reverse
 go 1.20
 
 require (
-	github.com/0xF7A4C6/clean-http v0.0.0-20230610042633-1e8946cb6a60
+	github.com/0xF7A4C6/clean-http v0.0.0-20230610065349-7863ba038fc0
 	github.com/0xF7A4C6/fingerprint-client v0.0.0-20230608004554-fecc9cc5246e
 	github.com/bogdanfinn/fhttp v0.5.23
 )
