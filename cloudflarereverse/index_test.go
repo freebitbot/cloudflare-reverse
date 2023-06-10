@@ -7,6 +7,8 @@ import (
 )
 
 func TestGetCfbm(t *testing.T) {
+	unflag := "SX7Z6w57deFOcq6EgWCXdDJg5u.LAaVRZmjUIGkaUyI-1686370565-0-AV7inSvrGheK4iwLLsTn74u43Fpv+RJFWDe0GzYR3LiViXXoG3r8SqOPF14hOvlKNQ=="
+
 	brFp, err := fp.LoadFingerprint(&fp.LoadingConfig{
 		FilePath: "./fp.json",
 	})
@@ -41,7 +43,14 @@ func TestGetCfbm(t *testing.T) {
 				return
 			}
 
-			fmt.Println(got)
+			fmt.Printf("[🔑] Cookie: %s\n", got)
+
+			if len(got) != len(unflag) {
+				t.Errorf("GetCfbm() error = %v, len = %d, wantlen = %d", fmt.Errorf("cookie lenght bad"), len(got), len(unflag))
+				return
+			}
+
+			fmt.Println("[✅] Unflag")
 		})
 	}
 }

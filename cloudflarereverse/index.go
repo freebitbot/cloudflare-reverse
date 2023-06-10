@@ -31,36 +31,6 @@ func randHexString(n int) string {
 }
 
 func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
-	header := http.Header{
-		`authority`:          {`discord.com`},
-		`accept`:             {`*/*`},
-		`accept-language`:    {`fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7`},
-		`content-type`:       {`application/json`},
-		`origin`:             {`https://discord.com`},
-		`sec-ch-ua`:          {`"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"`},
-		`sec-ch-ua-mobile`:   {`?0`},
-		`sec-ch-ua-platform`: {fmt.Sprintf(`"%s"`, brFp.Navigator.Platform)},
-		`sec-fetch-dest`:     {`empty`},
-		`sec-fetch-mode`:     {`cors`},
-		`sec-fetch-site`:     {`same-origin`},
-		`user-agent`:         {brFp.Navigator.UserAgent},
-
-		http.HeaderOrderKey: {
-			"authority",
-			"accept",
-			"accept-language",
-			"content-type",
-			"origin",
-			"sec-ch-ua",
-			"sec-ch-ua-mobile",
-			"sec-ch-ua-platform",
-			"sec-fetch-dest",
-			"sec-fetch-mode",
-			"sec-fetch-site",
-			"user-agent",
-		},
-	}
-
 	client, err := cleanhttp.NewCleanHttpClient(&cleanhttp.Config{
 		Proxy:     proxy,
 		BrowserFp: brFp,
@@ -72,7 +42,6 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 	resp, err := client.Do(cleanhttp.RequestOption{
 		Method: "GET",
 		Url:    "https://discord.com",
-		Header: header,
 	})
 	if err != nil {
 		return "", err
@@ -93,7 +62,6 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 	resp, err = client.Do(cleanhttp.RequestOption{
 		Method: "GET",
 		Url:    "https://discord.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/5da7637f/invisible.js",
-		Header: header,
 	})
 	if err != nil {
 		return "", err
@@ -126,10 +94,11 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	jsonPayload, _ := json.Marshal(FingerprintPayload{
 		Src: "worker",
-		T:   float64(timing+float64(randInt(300, 500))) + rand.Float64(),
+		T:   float64(timing+float64(randInt(300, 700))) + rand.Float64(),
 		S:   S,
 		Fp: Fingerprint{
 			Results: []string{
+				randHexString(16),
 				randHexString(16),
 			},
 			Timing: int(timing),
@@ -138,11 +107,47 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 		Wp: strings.Split(Compress(formatFingerprint(brFp), Pass), "===")[0],
 	})
 
+	p := string(jsonPayload)
+	ua := cleanhttp.ParseUserAgent(brFp.Navigator.UserAgent)
+
 	resp, err = client.Do(cleanhttp.RequestOption{
 		Method: "POST",
 		Url:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/b/cv/result/%s", Cf.R),
-		Header: header,
-		Body:   strings.NewReader(string(jsonPayload)),
+		Header: http.Header{
+			`accept`:             {`*/*`},
+			`accept-encoding`:    {`gzip, deflate, br`},
+			`accept-language`:    {cleanhttp.GenerateAcceptLanguageHeader(brFp.Navigator.Languages)},
+			`content-length`:     {fmt.Sprintf("%d", len(p))},
+			`content-type`:       {`application/json`},
+			`cookie`:             {client.FormatCookies()},
+			`origin`:             {"https://discord.com"},
+			`referer`:            {`https://discord.com/channels/@me`},
+			`sec-ch-ua`:          {fmt.Sprintf(`"Not.A/Brand";v="8", "Chromium";v="%s", "Google Chrome";v="%s"`, ua.BrowserVersion, ua.BrowserName)},
+			`sec-ch-ua-mobile`:   {`?0`},
+			`sec-ch-ua-platform`: {fmt.Sprintf(`"%s"`, ua.OSName)},
+			`sec-fetch-dest`:     {`empty`},
+			`sec-fetch-mode`:     {`cors`},
+			`sec-fetch-site`:     {`same-origin`},
+			`user-agent`:         {brFp.Navigator.UserAgent},
+
+			http.HeaderOrderKey: {
+				`accept`,
+				`accept-encoding`,
+				`accept-language`,
+				`content-type`,
+				`cookie`,
+				`origin`,
+				`referer`,
+				`sec-ch-ua`,
+				`sec-ch-ua-mobile`,
+				`sec-ch-ua-platform`,
+				`sec-fetch-dest`,
+				`sec-fetch-mode`,
+				`sec-fetch-site`,
+				`user-agent`,
+			},
+		},
+		Body: strings.NewReader(p),
 	})
 	if err != nil {
 		return "", err
@@ -162,3 +167,8 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	return "", fmt.Errorf("no cookie found")
 }
+
+/*
+flag:  qWktQ9T0fVhNF6JvbS_ivhH9L5dh0yI4CriPg773xK8-1686372156-0-AUQMpvymJKZcjOeXgqzMHMeXjjFC79uoYEAuUccQ9TMrAfh9OcgoSMHR0YFbtnFbVQ==
+clean: mRXc.JAC.UuIBz3P6LOtHuhzWSa4CSnloZsAMb_5NcE-1686372122-0-AQ1lIBvkNn8ns3eTf6+ww4ONfvHLXg2e19bjAq2Zw1EiVeov1gu5tXxYwvMBB0v87w==
+*/
