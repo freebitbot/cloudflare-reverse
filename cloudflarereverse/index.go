@@ -109,8 +109,6 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 		Wp: strings.Split(Compress(formatFingerprint(brFp), Pass), "===")[0],
 	})
 
-	fmt.Println(string(jsonPayload))
-
 	p := string(jsonPayload)
 	head := client.GenerateBaseHeaders()
 
@@ -158,9 +156,6 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 	}
 
 	defer resp.Body.Close()
-
-	fmt.Println(resp.Request.Header)
-	fmt.Println("len",len(p))
 
 	if resp.StatusCode != 200 {
 		return "", fmt.Errorf("cant submit answer status code %d", resp.StatusCode)
