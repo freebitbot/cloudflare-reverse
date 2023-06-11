@@ -18,9 +18,11 @@ var (
 	re = regexp.MustCompile(`[0-9]*\.[0-9]+:[0-9]+:`)
 )
 
-// Need improvement
-func randInt(min int, max int) int {
+func Init() {
 	rand.Seed(time.Now().UnixNano())
+}
+
+func randInt(min int, max int) int {
 	return min + rand.Intn(max-min)
 }
 
@@ -108,7 +110,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 	})
 
 	p := string(jsonPayload)
-	ua := cleanhttp.ParseUserAgent(brFp.Navigator.UserAgent)
+	head := client.GenerateBaseHeaders()
 
 	resp, err = client.Do(cleanhttp.RequestOption{
 		Method: "POST",
@@ -116,15 +118,14 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 		Header: http.Header{
 			`accept`:             {`*/*`},
 			`accept-encoding`:    {`gzip, deflate, br`},
-			`accept-language`:    {cleanhttp.GenerateAcceptLanguageHeader(brFp.Navigator.Languages)},
-			`content-length`:     {fmt.Sprintf("%d", len(p))},
+			`accept-language`:    {head.AcceptLanguage},
 			`content-type`:       {`application/json`},
 			`cookie`:             {client.FormatCookies()},
 			`origin`:             {"https://discord.com"},
 			`referer`:            {`https://discord.com/channels/@me`},
-			`sec-ch-ua`:          {fmt.Sprintf(`"Not.A/Brand";v="8", "Chromium";v="%s", "Google Chrome";v="%s"`, ua.BrowserVersion, ua.BrowserName)},
+			`sec-ch-ua`:          {head.SecChUa},
 			`sec-ch-ua-mobile`:   {`?0`},
-			`sec-ch-ua-platform`: {fmt.Sprintf(`"%s"`, ua.OSName)},
+			`sec-ch-ua-platform`: {head.SecChUaPlatform},
 			`sec-fetch-dest`:     {`empty`},
 			`sec-fetch-mode`:     {`cors`},
 			`sec-fetch-site`:     {`same-origin`},

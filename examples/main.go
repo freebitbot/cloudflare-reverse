@@ -16,6 +16,8 @@ func main() {
 		panic(err)
 	}
 
+	cf.Init()
+
 	for i := 0; i < 5; i++ {
 		cookie, err := cf.GetCfbm(brFp, "")
 
