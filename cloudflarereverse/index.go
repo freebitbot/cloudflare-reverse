@@ -16,6 +16,7 @@ import (
 
 var (
 	re = regexp.MustCompile(`[0-9]*\.[0-9]+:[0-9]+:`)
+	version = "5da7637f"
 )
 
 func Init() {
@@ -63,7 +64,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	resp, err = client.Do(cleanhttp.RequestOption{
 		Method: "GET",
-		Url:    "https://discord.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/5da7637f/invisible.js",
+		Url:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/%s/invisible.js", version),
 	})
 	if err != nil {
 		return "", err
@@ -92,22 +93,23 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 	Base := re.FindString(JsScript)
 	S := Base + strings.Split(JsScript, Base)[1][:43]
 
-	timing := float64(randInt(100, 400))
+	timing := float64(randInt(100, 250))
 
 	jsonPayload, _ := json.Marshal(FingerprintPayload{
 		Src: "worker",
-		T:   float64(timing+float64(randInt(300, 700))) + rand.Float64(),
+		T:   float64(timing+float64(randInt(50, 100))) + rand.Float64(),
 		S:   S,
 		Fp: Fingerprint{
 			Results: []string{
 				randHexString(16),
-				randHexString(16),
 			},
-			Timing: int(timing),
+			//Timing: int(timing),
 		},
 		M:  Cf.M,
 		Wp: strings.Split(Compress(formatFingerprint(brFp), Pass), "===")[0],
 	})
+
+	fmt.Println(string(jsonPayload))
 
 	p := string(jsonPayload)
 	head := client.GenerateBaseHeaders()
@@ -120,7 +122,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 			`accept-encoding`:    {`gzip, deflate, br`},
 			`accept-language`:    {head.AcceptLanguage},
 			`content-type`:       {`application/json`},
-			`cookie`:             {client.FormatCookies()},
+			`cookie`:             {head.Cookies},
 			`origin`:             {"https://discord.com"},
 			`referer`:            {`https://discord.com/channels/@me`},
 			`sec-ch-ua`:          {head.SecChUa},
@@ -135,6 +137,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 				`accept`,
 				`accept-encoding`,
 				`accept-language`,
+				`content-length`,
 				`content-type`,
 				`cookie`,
 				`origin`,
@@ -156,8 +159,11 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	defer resp.Body.Close()
 
+	fmt.Println(resp.Request.Header)
+	fmt.Println("len",len(p))
+
 	if resp.StatusCode != 200 {
-		return "", fmt.Errorf("cant submit answer")
+		return "", fmt.Errorf("cant submit answer status code %d", resp.StatusCode)
 	}
 
 	for _, c := range client.Cookies {

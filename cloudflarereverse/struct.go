@@ -2,7 +2,7 @@ package cloudflarereverse
 
 type Fingerprint struct {
 	Results []string `json:"results"`
-	Timing  int      `json:"timing"`
+	//Timing  int      `json:"timing"`
 }
 
 type FingerprintPayload struct {
