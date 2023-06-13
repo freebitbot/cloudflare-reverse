@@ -93,19 +93,19 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 	Base := re.FindString(JsScript)
 	S := Base + strings.Split(JsScript, Base)[1][:43]
 
-	timing := float64(randInt(100, 250))
+	//timing := float64(randInt(100, 250))
 
 	jsonPayload, _ := json.Marshal(FingerprintPayload{
-		Src: "worker",
-		T:   float64(timing+float64(randInt(50, 100))) + rand.Float64(),
+		/*Src: "worker",
+		T:   float64(timing+float64(randInt(50, 100))) + rand.Float64(),*/
 		S:   S,
-		Fp: Fingerprint{
+		/*Fp: Fingerprint{
 			Results: []string{
 				randHexString(16),
 			},
 			//Timing: int(timing),
 		},
-		M:  Cf.M,
+		M:  Cf.M,*/
 		Wp: strings.Split(Compress(formatFingerprint(brFp), Pass), "===")[0],
 	})
 
