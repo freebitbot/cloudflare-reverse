@@ -38,7 +38,7 @@ func Compress(uncompressed string, keyStrBase64 string) string {
 	return res
 }
 
-func _compress(uncompressed string, bitsPerChar int, getCharFromInt func(character int) string) string {
+func _compress(uncompressed string, bitsPerChar int, getCharFromInt func(character int) string) string { //nolint: maintidx,gocyclo
 	if len(uncompressed) == 0 {
 		return ""
 	}
@@ -238,7 +238,7 @@ func _compress(uncompressed string, bitsPerChar int, getCharFromInt func(charact
 		}
 		contextEnlargeIn--
 		if contextEnlargeIn == 0 {
-			contextEnlargeIn = math.Pow(2, float64(contextNumBits))
+			//contextEnlargeIn = math.Pow(2, float64(contextNumBits))
 			contextNumBits++
 		}
 	}
@@ -263,9 +263,9 @@ func _compress(uncompressed string, bitsPerChar int, getCharFromInt func(charact
 			//contextDataString += getCharFromInt(contextDataVal)
 			contextDataString.WriteString(getCharFromInt(contextDataVal))
 			break
-		} else {
-			contextDataPosition++
 		}
+		contextDataPosition++
+
 	}
 	return contextDataString.String()
 }
@@ -297,7 +297,7 @@ func getBaseValue(alphabet string, char byte) int {
 	vv, ok := baseReverseDic.Load(alphabet)
 	var arr map[byte]int
 	if ok {
-		arr = vv.(map[byte]int)
+		arr = vv.(map[byte]int) //nolint: errcheck
 	} else {
 		arr = covertToBaseReverseDic(alphabet)
 		baseReverseDic.Store(alphabet, arr)
@@ -315,7 +315,7 @@ func readBits(nb int, data *dataStruct) int {
 		if data.position == 0 {
 			data.position = 32
 			data.val = getBaseValue(data.alphabet, data.input[data.index])
-			data.index += 1
+			data.index++
 		}
 		if respB > 0 {
 			result |= power
@@ -327,10 +327,10 @@ func readBits(nb int, data *dataStruct) int {
 
 func appendValue(data *dataStruct, str string) {
 	data.dictionary = append(data.dictionary, str)
-	data.enlargeIn -= 1
+	data.enlargeIn--
 	if data.enlargeIn == 0 {
 		data.enlargeIn = math.Pow(2, float64(data.numBits))
-		data.numBits += 1
+		data.numBits++
 	}
 }
 
@@ -373,7 +373,7 @@ func Decompress(input string, keyStrBase64 string) (string, error) {
 		return result, err
 	}
 	last := result
-	data.numBits += 1
+	data.numBits++
 	for {
 		str, isEnd, err := getString(last, &data)
 		if err != nil || isEnd {

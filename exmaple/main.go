@@ -3,13 +3,13 @@ package main
 import (
 	"fmt"
 
-	cf "github.com/0xF7A4C6/cloudflare-reverse/cloudflarereverse"
-	fp "github.com/0xF7A4C6/fingerprint-client/fingerprintclient"
+	cf "github.com/IIayk122/cloudflare-reverse/cloudflarereverse"
+	fp "github.com/IIayk122/cloudflare-reverse/pkg/fpclient"
 )
 
 func main() {
 	brFp, err := fp.LoadFingerprint(&fp.LoadingConfig{
-		FilePath: "./profile.json",
+		FilePath: "../assets/fingerprints/macos.json",
 	})
 
 	if err != nil {
