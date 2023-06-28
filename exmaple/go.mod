@@ -2,9 +2,9 @@ module exmaple
 
 go 1.20
 
-replace github.com/IIayk122/cloudflare-reverse => ../.
+replace github.com/0xF7A4C6/cloudflare-reverse => ../.
 
-require github.com/IIayk122/cloudflare-reverse v0.0.0-00010101000000-000000000000
+require github.com/0xF7A4C6/cloudflare-reverse v0.0.0-00010101000000-000000000000
 
 require (
 	github.com/andybalholm/brotli v1.0.4 // indirect
