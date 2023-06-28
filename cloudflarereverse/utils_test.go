@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/IIayk122/cloudflare-reverse/pkg/fpclient"
+	"github.com/0xF7A4C6/cloudflare-reverse/pkg/fpclient"
 )
 
 func Test_formatFingerprint(t *testing.T) {

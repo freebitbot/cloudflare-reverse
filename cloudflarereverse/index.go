@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/IIayk122/cloudflare-reverse/pkg/cleanhttp"
-	fp "github.com/IIayk122/cloudflare-reverse/pkg/fpclient"
+	"github.com/0xF7A4C6/cloudflare-reverse/pkg/cleanhttp"
+	fp "github.com/0xF7A4C6/cloudflare-reverse/pkg/fpclient"
 	http "github.com/bogdanfinn/fhttp"
 )
 

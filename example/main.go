@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	cf "github.com/IIayk122/cloudflare-reverse/cloudflarereverse"
-	fp "github.com/IIayk122/cloudflare-reverse/pkg/fpclient"
+	cf "github.com/0xF7A4C6/cloudflare-reverse/cloudflarereverse"
+	fp "github.com/0xF7A4C6/cloudflare-reverse/pkg/fpclient"
 )
 
 func main() {

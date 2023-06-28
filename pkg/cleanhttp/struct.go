@@ -3,7 +3,7 @@ package cleanhttp
 import (
 	"io"
 
-	fp "github.com/IIayk122/cloudflare-reverse/pkg/fpclient"
+	fp "github.com/0xF7A4C6/cloudflare-reverse/pkg/fpclient"
 	http "github.com/bogdanfinn/fhttp"
 	tls_client "github.com/bogdanfinn/tls-client"
 )

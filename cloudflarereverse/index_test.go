@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	fp "github.com/IIayk122/cloudflare-reverse/pkg/fpclient"
+	fp "github.com/0xF7A4C6/cloudflare-reverse/pkg/fpclient"
 )
 
 func TestGetCfbm(t *testing.T) {

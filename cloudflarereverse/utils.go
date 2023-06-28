@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/IIayk122/cloudflare-reverse/pkg/fpclient"
+	"github.com/0xF7A4C6/cloudflare-reverse/pkg/fpclient"
 )
 
 type FpStruct map[string][]string
