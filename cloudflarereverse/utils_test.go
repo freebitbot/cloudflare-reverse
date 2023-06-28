@@ -2,13 +2,14 @@ package cloudflarereverse
 
 import (
 	"fmt"
-	fpclient "github.com/0xF7A4C6/fingerprint-client/fingerprintclient"
 	"testing"
+
+	"github.com/IIayk122/cloudflare-reverse/pkg/fpclient"
 )
 
 func Test_formatFingerprint(t *testing.T) {
 	brFp, err := fpclient.LoadFingerprint(&fpclient.LoadingConfig{
-		FilePath: "./fp.json",
+		FilePath: "../assets/fingerprints/macos.json",
 	})
 
 	if err != nil {
@@ -23,7 +24,7 @@ func Test_formatFingerprint(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+
 		{
 			name: "test-format-fingerprint",
 			args: args{
@@ -32,7 +33,7 @@ func Test_formatFingerprint(t *testing.T) {
 		},
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.name, func(_ *testing.T) {
 			res := formatFingerprint(tt.args.fp)
 			fmt.Println(res)
 		})

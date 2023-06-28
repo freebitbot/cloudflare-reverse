@@ -1,40 +1,30 @@
 package cloudflarereverse
 
 import (
-	"encoding/hex"
 	"encoding/json"
 	"fmt"
-	"github.com/0xF7A4C6/clean-http/cleanhttp"
-	fp "github.com/0xF7A4C6/fingerprint-client/fingerprintclient"
-	http "github.com/bogdanfinn/fhttp"
-	"io/ioutil"
+	"io"
 	"math/rand"
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/IIayk122/cloudflare-reverse/pkg/cleanhttp"
+	fp "github.com/IIayk122/cloudflare-reverse/pkg/fpclient"
+	http "github.com/bogdanfinn/fhttp"
 )
 
 var (
-	re = regexp.MustCompile(`[0-9]*\.[0-9]+:[0-9]+:`)
+	re      = regexp.MustCompile(`[0-9]*\.[0-9]+:[0-9]+:`)
 	version = "5da7637f"
 )
 
 func Init() {
-	rand.Seed(time.Now().UnixNano())
-}
-
-func randInt(min int, max int) int {
-	return min + rand.Intn(max-min)
-}
-
-func randHexString(n int) string {
-	b := make([]byte, n)
-	_, _ = rand.Read(b)
-	return hex.EncodeToString(b)
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 }
 
 func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
-	client, err := cleanhttp.NewCleanHttpClient(&cleanhttp.Config{
+	client, err := cleanhttp.NewCleanHTTPClient(&cleanhttp.Config{
 		Proxy:     proxy,
 		BrowserFp: brFp,
 	})
@@ -44,7 +34,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	resp, err := client.Do(cleanhttp.RequestOption{
 		Method: "GET",
-		Url:    "https://discord.com",
+		URL:    "https://discord.com",
 	})
 	if err != nil {
 		return "", err
@@ -52,19 +42,19 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	defer resp.Body.Close()
 
-	response, err := ioutil.ReadAll(resp.Body)
+	response, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
 	}
 
 	Cf := &CfParams{
 		R: strings.Split(strings.Split(string(response), "r:'")[1], "',m")[0],
-		M: strings.Split(strings.Split(string(response), "m:'")[1], "'};")[0],
+		//	M: strings.Split(strings.Split(string(response), "m:'")[1], "'};")[0],
 	}
 
 	resp, err = client.Do(cleanhttp.RequestOption{
 		Method: "GET",
-		Url:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/%s/invisible.js", version),
+		URL:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/%s/invisible.js", version),
 	})
 	if err != nil {
 		return "", err
@@ -72,7 +62,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	defer resp.Body.Close()
 
-	response, err = ioutil.ReadAll(resp.Body)
+	response, err = io.ReadAll(resp.Body)
 	if err != nil {
 		return "", err
 	}
@@ -95,10 +85,10 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	//timing := float64(randInt(100, 250))
 
-	jsonPayload, _ := json.Marshal(FingerprintPayload{
+	jsonPayload, _ := json.Marshal(FingerprintPayload{ //nolint: errcheck
 		/*Src: "worker",
 		T:   float64(timing+float64(randInt(50, 100))) + rand.Float64(),*/
-		S:   S,
+		S: S,
 		/*Fp: Fingerprint{
 			Results: []string{
 				randHexString(16),
@@ -106,7 +96,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 			//Timing: int(timing),
 		},
 		M:  Cf.M,*/
-		Wp: strings.Split(Compress(formatFingerprint(brFp), Pass), "===")[0],
+		Wp: strings.Split(Compress(FormatFingerprint(brFp), Pass), "===")[0],
 	})
 
 	p := string(jsonPayload)
@@ -114,7 +104,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	resp, err = client.Do(cleanhttp.RequestOption{
 		Method: "POST",
-		Url:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/b/cv/result/%s", Cf.R),
+		URL:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/b/cv/result/%s", Cf.R),
 		Header: http.Header{
 			`accept`:             {`*/*`},
 			`accept-encoding`:    {`gzip, deflate, br`},
