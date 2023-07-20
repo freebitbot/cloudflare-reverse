@@ -1,4 +1,4 @@
-module github.com/0xF7A4C6/cloudflare-reverse
+module github.com/Implex-ltd/cloudflare-reverse
 
 go 1.20
 
