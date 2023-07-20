@@ -6,13 +6,16 @@ type Fingerprint struct {
 }
 
 type FingerprintPayload struct {
-	//Src string  `json:"src"`
 	Wp string `json:"wp"`
-	//M   string  `json:"m"`
-	S string `json:"s"`
-	//T   float64 `json:"t"`
+	S  string `json:"s"`
 
-	//Fp Fingerprint `json:"fp"
+	/*
+		* Params removed on current version.
+			Src string  `json:"src"`
+			M   string  `json:"m"`
+			T   float64 `json:"t"`
+			Fp Fingerprint `json:"fp"
+	*/
 }
 
 type CfParams struct {

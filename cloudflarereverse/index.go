@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/0xF7A4C6/cloudflare-reverse/pkg/cleanhttp"
-	fp "github.com/0xF7A4C6/cloudflare-reverse/pkg/fpclient"
+	"github.com/Implex-ltd/cleanhttp/cleanhttp"
+	fp "github.com/Implex-ltd/fingerprint-client/fpclient"
 	http "github.com/bogdanfinn/fhttp"
 )
 
@@ -24,7 +24,7 @@ func Init() {
 }
 
 func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
-	client, err := cleanhttp.NewCleanHTTPClient(&cleanhttp.Config{
+	client, err := cleanhttp.NewCleanHttpClient(&cleanhttp.Config{
 		Proxy:     proxy,
 		BrowserFp: brFp,
 	})
@@ -34,7 +34,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	resp, err := client.Do(cleanhttp.RequestOption{
 		Method: "GET",
-		URL:    "https://discord.com",
+		Url:    "https://discord.com",
 	})
 	if err != nil {
 		return "", err
@@ -54,7 +54,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	resp, err = client.Do(cleanhttp.RequestOption{
 		Method: "GET",
-		URL:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/%s/invisible.js", version),
+		Url:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/%s/invisible.js", version),
 	})
 	if err != nil {
 		return "", err
@@ -104,7 +104,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	resp, err = client.Do(cleanhttp.RequestOption{
 		Method: "POST",
-		URL:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/b/cv/result/%s", Cf.R),
+		Url:    fmt.Sprintf("https://discord.com/cdn-cgi/challenge-platform/h/b/cv/result/%s", Cf.R),
 		Header: http.Header{
 			`accept`:             {`*/*`},
 			`accept-encoding`:    {`gzip, deflate, br`},
@@ -159,8 +159,3 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 
 	return "", fmt.Errorf("no cookie found")
 }
-
-/*
-flag:  qWktQ9T0fVhNF6JvbS_ivhH9L5dh0yI4CriPg773xK8-1686372156-0-AUQMpvymJKZcjOeXgqzMHMeXjjFC79uoYEAuUccQ9TMrAfh9OcgoSMHR0YFbtnFbVQ==
-clean: mRXc.JAC.UuIBz3P6LOtHuhzWSa4CSnloZsAMb_5NcE-1686372122-0-AQ1lIBvkNn8ns3eTf6+ww4ONfvHLXg2e19bjAq2Zw1EiVeov1gu5tXxYwvMBB0v87w==
-*/

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	fp "github.com/0xF7A4C6/cloudflare-reverse/pkg/fpclient"
+	fp "github.com/Implex-ltd/fingerprint-client/fpclient"
 )
 
 func TestGetCfbm(t *testing.T) {
@@ -31,8 +31,7 @@ func TestGetCfbm(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			args: args{
-				brFp:  brFp,
-				proxy: "http://cap1217:gLAty@172.252.8.224:61234",
+				brFp: brFp,
 			},
 		},
 	}

@@ -3,7 +3,7 @@ package cleanhttp
 import (
 	"io"
 
-	fp "github.com/0xF7A4C6/cloudflare-reverse/pkg/fpclient"
+	fp "github.com/Implex-ltd/fingerprint-client/fpclient"
 	http "github.com/bogdanfinn/fhttp"
 	tls_client "github.com/bogdanfinn/tls-client"
 )
@@ -18,7 +18,7 @@ type Config struct {
 	Proxy     string
 	Timeout   int
 	BrowserFp *fp.Fingerprint
-	TLSFp     *fp.TLSFingerprint
+	TLSFp     *fp.TlsFingerprint
 	Profile   tls_client.ClientProfile
 }
 
