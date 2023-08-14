@@ -152,7 +152,6 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 	}
 
 	for _, c := range client.Cookies {
-		fmt.Println(c.Name, c.Value)
 		if c.Name == "cf_clearance" {
 			return c.Value, nil
 		}
