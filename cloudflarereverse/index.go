@@ -16,7 +16,7 @@ import (
 
 var (
 	re      = regexp.MustCompile(`[0-9]*\.[0-9]+:[0-9]+:`)
-	version = "5da7637f"
+	version = "7186c00a"
 )
 
 func Init() {
@@ -48,7 +48,7 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 	}
 
 	Cf := &CfParams{
-		R: strings.Split(strings.Split(string(response), "r:'")[1], "',m")[0],
+		R: strings.Split(strings.Split(string(response), "r:'")[1], "'")[0],
 		//	M: strings.Split(strings.Split(string(response), "m:'")[1], "'};")[0],
 	}
 
@@ -152,7 +152,8 @@ func GetCfbm(brFp *fp.Fingerprint, proxy string) (string, error) {
 	}
 
 	for _, c := range client.Cookies {
-		if c.Name == "__cf_bm" {
+		fmt.Println(c.Name, c.Value)
+		if c.Name == "cf_clearance" {
 			return c.Value, nil
 		}
 	}
